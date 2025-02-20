@@ -4,16 +4,19 @@ const debug = require('debug')('app');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT;
 
-app.use(express.static(path.join(__dirname,"/public/")));
+//app.use(express.static(path.join(__dirname,"/public/")));
+
+app.set("views","./src/views");
+app.set("view engine", "ejs");
 
 app.get("/", (req,res) => {
-    res.send('Hello Express');
+    res.render('index',{username: 'Kitti-Bank', customers: ['Maria','Wataya','Haruji']});
 
 })
 
-app.listen(port, ()=>{
-   debug(console.log("Listening on port " + port));
+app.listen(PORT, ()=>{
+   debug(console.log("Listening on port " + PORT));
  
 })
